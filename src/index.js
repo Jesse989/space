@@ -1,34 +1,22 @@
 import 'phaser';
+import BootScene from './scenes/BootScene.js';
+import LibraryScene from './scenes/LibraryScene.js';
 
-var config = {
-    type: Phaser.AUTO,
-    parent: 'phaser-example',
-    width: 800,
-    height: 600,
-    scene: {
-        preload: preload,
-        create: create
+const config = {
+  type: Phaser.AUTO,
+  width: 800,
+  height: 480,
+  backgroundColor: '#000000',
+  parent: 'space',
+  pixelArt: true,
+  physics: {
+    default: 'arcade',
+    arcade: {
+        debug: false,
+        gravity: { y: 0 }
     }
-};
-
-var game = new Phaser.Game(config);
-
-function preload ()
-{
-    this.load.image('logo', 'assets/logo.png');
+  },
+  scene: [ BootScene, LibraryScene ]
 }
 
-function create ()
-{
-    var logo = this.add.image(400, 150, 'logo');
-
-    this.tweens.add({
-        targets: logo,
-        y: 450,
-        duration: 2000,
-        ease: 'Power2',
-        yoyo: true,
-        loop: -1
-    });
-
-}
+var Game = new Phaser.Game(config);
