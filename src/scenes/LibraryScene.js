@@ -6,7 +6,7 @@ export default class LibraryScene extends Phaser.Scene {
       key: 'LibraryScene',
     });
     this.background;
-    this.cooper;
+    this.characters = [ 'cooper', 'robot', 'jared', 'scarlett', 'litbanana', 'dancingcoffee'];
     this.cooperShadow;
 
   }
@@ -22,13 +22,24 @@ export default class LibraryScene extends Phaser.Scene {
     this.background = this.add.image(20, 0, 'background')
       .setOrigin(0);
 
-    this.cooper = new Player(this, 164, 140, 'cooper')
+    this.characters.map((el) => {
+
+      this[el] = new Player(this, Phaser.Math.Between(164, 364), Phaser.Math.Between(140, 240), el)
+      if(this[el].texture.key !== 'cooper') {
+
+        this[el].anims.play(this[el].texture.key, false)
+
+      }
+
+    })
+
     this.scene.scene.cameras.main.startFollow(this.cooper).setZoom(2)
+
 
   }
 
   update() {
-    this.cooper.update();
+
   }
 
 
